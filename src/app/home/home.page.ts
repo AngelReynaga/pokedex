@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PokeapiService } from '../pokeapi.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,24 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
-
-  constructor() {}
-
+  listPokemon: any[]=[];
+  info: any;
+  constructor(private pokeService: PokeapiService) {}
+  ngOnInit()
+  {
+    this.pokeService.getListPokemon().subscribe((data)=>{
+      this.listPokemon=data.results;
+    });
+  }
+  handleDetail(urlPokemon: any){
+    this.pokeService.getDetail(urlPokemon).subscribe((data)=>{
+      this.info=data;
+  });
+  this.information();
+  }
+  
+  information()
+  {
+    alert("Name: "+this.info.name+'\n'+"Number: "+this.info.order+'\n'+"Weight: "+this.info.weight+'\n'+"Height: "+this.info.height+'\n');
+  }
 }
