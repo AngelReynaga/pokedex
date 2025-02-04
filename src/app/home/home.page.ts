@@ -21,12 +21,8 @@ export class HomePage {
   handleDetail(urlPokemon: any){
     this.pokeService.getDetail(urlPokemon).subscribe((data)=>{
       this.info=data;
+      alert("Name: "+this.info.name+'\n'+"Number: "+this.info.order+'\n'+"Weight: "+this.info.weight+"kg"+'\n'+"Height: "+this.info.height+"m"+'\n');
   });
-  this.information();
   }
   
-  information()
-  {
-    alert("Name: "+this.info.name+'\n'+"Number: "+this.info.order+'\n'+"Weight: "+this.info.weight+'\n'+"Height: "+this.info.height+'\n');
-  }
 }
